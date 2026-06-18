@@ -74,66 +74,105 @@
   color: var(--monroe-bg-dark, #0e0e0e);
 }
 
-/* --- Field rows: <ul><li> styled as bordered pseudo-input rows --- */
-.columns-finder ul {
-  list-style: none;
-  margin: 0 auto;
-  padding: 0;
+/* --- Vehicle search form: cascading Year / Make / Model selects + button --- */
+.columns-finder .finder-vehicle-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   max-width: 480px;
+  margin: 0 auto;
 }
 
-.columns-finder li {
+.columns-finder .finder-field {
   position: relative;
-  display: flex;
-  align-items: center;
+}
+
+/* Native <select> styled to match the source's bordered field rows, with a
+   dark chevron box on the right. */
+.columns-finder .finder-select {
+  appearance: none;
+  width: 100%;
   min-height: 52px;
-  margin-bottom: 12px;
-  padding: 0 16px;
+  padding: 0 60px 0 16px;
   border: 1px solid #eee;
   border-radius: 5px;
   background-color: #fff;
   box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
   font-family: var(--monroe-body-font, "Open Sans");
   font-size: 16px;
-  text-align: left;
-  color: #6b6b6b;
+  color: #444;
+  cursor: pointer;
 }
 
-/* Dropdown-arrow box on the vehicle (first) panel fields */
-.columns-finder > div:last-child > div:first-child li::after {
+.columns-finder .finder-select:disabled {
+  color: #b0b0b0;
+  cursor: not-allowed;
+  background-color: #f7f7f7;
+}
+
+/* Dark chevron box on the right of each select */
+.columns-finder .finder-field::after {
   content: "";
   position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
+  top: 1px;
+  right: 1px;
+  bottom: 1px;
   width: 48px;
   background-color: #3c3c3c;
   border-radius: 0 4px 4px 0;
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  pointer-events: none;
 }
 
-.columns-finder > div:last-child > div:first-child li::before {
+.columns-finder .finder-field::before {
   content: "";
   position: absolute;
   top: 50%;
   right: 18px;
+  z-index: 1;
   width: 0;
   height: 0;
   border-left: 6px solid transparent;
   border-right: 6px solid transparent;
   border-top: 7px solid #fff;
   transform: translateY(-50%);
-  z-index: 1;
+  pointer-events: none;
 }
 
-/* --- Search button: yellow brand button rendered after the field list --- */
-.columns-finder ul::after {
-  content: "Search";
+/* --- Part-number search form: text input + inline button --- */
+.columns-finder .finder-partnumber-form {
+  display: flex;
+  align-items: stretch;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+.columns-finder .finder-input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 52px;
+  padding: 0 16px;
+  border: 1px solid #eee;
+  border-right: 0;
+  border-radius: 5px 0 0 5px;
+  background-color: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
+  font-family: var(--monroe-body-font, "Open Sans");
+  font-size: 16px;
+  color: #444;
+}
+
+.columns-finder .finder-input::placeholder {
+  color: #6b6b6b;
+  text-transform: uppercase;
+}
+
+/* --- Yellow brand search button (shared by both forms) --- */
+.columns-finder .finder-search-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  margin-top: 12px;
   padding: 18px 40px;
+  border: 0;
   border-radius: var(--monroe-button-radius, 6px);
   background-color: var(--monroe-yellow, #ffd100);
   color: var(--monroe-button-text, #212121);
@@ -142,27 +181,26 @@
   font-size: 14px;
   letter-spacing: 0.05em;
   text-transform: uppercase;
+  cursor: pointer;
+  transition: filter 0.3s ease;
 }
 
-/* On the vehicle panel the button is centered below the fields;
-   on the part-number panel it sits inline beside the single field. */
-.columns-finder > div:last-child > div:last-child ul {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: stretch;
-  gap: 0;
+.columns-finder .finder-vehicle-form .finder-search-btn {
+  align-self: center;
+  margin-top: 12px;
 }
 
-.columns-finder > div:last-child > div:last-child li {
-  flex: 1 1 auto;
-  margin-bottom: 0;
-  border-radius: 5px 0 0 5px;
-  border-right: 0;
-}
-
-.columns-finder > div:last-child > div:last-child ul::after {
-  margin-top: 0;
+.columns-finder .finder-partnumber-form .finder-search-btn {
   border-radius: 0 5px 5px 0;
+}
+
+.columns-finder .finder-search-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.columns-finder .finder-search-btn:hover:not(:disabled) {
+  filter: brightness(0.92);
 }
 
 @media (width >= 900px) {
