@@ -1,0 +1,13 @@
+{
+  "status": "success",
+  "url": "https://www.monroe.com/",
+  "path": "index",
+  "timestamp": "2026-06-18T00:05:15.913Z",
+  "title": "Monroe | Performance Shocks & Struts",
+  "template": "homepage",
+  "blocks": [
+    "hero-video",
+    "hero-intro",
+    "cards-tout"
+  ]
+}

@@ -1,0 +1,27 @@
+/* ==========================================================================
+   Monroe brand tokens — extracted from https://www.monroe.com/
+   Heading: FuturaStd-CondensedBold (proprietary) → Oswald condensed-bold fallback
+   Body: OpenSans → Open Sans
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Oswald:wght@500;600;700&display=swap');
+
+:root,
+:host {
+  /* Monroe brand colors */
+  --monroe-yellow: #ffd100;
+  --monroe-bg-dark: #0e0e0e;
+  --monroe-shell: #4f4f4f;
+  --monroe-tout-gray: #212121;
+  --monroe-button-text: #212121;
+
+  /* Monroe fonts */
+  --monroe-heading-font: oswald, "Arial Narrow", sans-serif;
+  --monroe-body-font: "Open Sans", arial, sans-serif;
+
+  /* Monroe spacing */
+  --monroe-card-radius: 16px;
+  --monroe-video-radius: 40px;
+  --monroe-button-radius: 6px;
+  --monroe-content-width: 1200px;
+}

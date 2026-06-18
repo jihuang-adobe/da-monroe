@@ -1,0 +1,38 @@
+{
+  "variantName": "hero-intro",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-06-17T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.monroe.com/",
+    "originPage": "Monroe homepage",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "minimal",
+    "purpose": "intro-statement",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "heading + paragraph + CTA",
+    "buttonCount": 1,
+    "imageCount": 0,
+    "videoCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "centered text-only intro / value-proposition statements",
+      "dark-themed mid-page headline + paragraph + CTA"
+    ],
+    "notSuitableFor": [
+      "heroes with background images or video (use hero-video)",
+      "repeating card grids"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/index"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-17T00:00:00.000Z"
+  }
+}

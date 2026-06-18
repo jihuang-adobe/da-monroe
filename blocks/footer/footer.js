@@ -1,36 +1,82 @@
+// Footer block — Monroe footer. Fetches the footer fragment (content-first),
+// builds three stacked sections: primary link row, centered brand logo,
+// and a bottom legal bar (DRiV logo + legal links). All copy/links/images
+// come from the fragment; only structure/classes are added here.
+
 import { getMetadata } from '../../scripts/aem.js';
-import { loadFragment } from '../fragment/fragment.js';
 
-/**
- * loads and decorates the footer
- * @param {Element} block The footer block element
- */
+function getFooterPath() {
+  const meta = getMetadata('footer');
+  return meta ? new URL(meta, window.location).pathname : '/footer';
+}
+
+async function fetchFooter() {
+  let resp = await fetch('/content/footer.plain.html');
+  if (!resp.ok) resp = await fetch(`${getFooterPath()}.plain.html`);
+  if (!resp.ok) return null;
+  const html = await resp.text();
+  const tmp = document.createElement('div');
+  tmp.innerHTML = html;
+  return tmp;
+}
+
 export default async function decorate(block) {
-  // load footer as fragment (skip if aem-embed already provided content)
-  if (block.textContent === '') {
-    const footerMeta = getMetadata('footer');
-    const footerPath = footerMeta ? new URL(footerMeta, window.location).pathname : '/footer';
-    const fragment = await loadFragment(footerPath);
+  const frag = await fetchFooter();
+  block.textContent = '';
+  if (!frag) return;
 
-    block.textContent = '';
-    const footer = document.createElement('div');
-    while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
-    block.append(footer);
-  }
+  const sections = [...frag.children].filter((c) => c.tagName === 'DIV');
 
-  // merge social icons into copyright row
-  const sections = block.querySelectorAll('.section');
-  if (sections.length >= 4) {
-    const copyrightSection = sections[2];
-    const socialSection = sections[3];
-    const socialUl = socialSection.querySelector('ul');
-    const copyrightWrapper = copyrightSection.querySelector('.default-content-wrapper');
-    if (socialUl && copyrightWrapper) {
-      const pipe = document.createElement('span');
-      pipe.className = 'footer-separator';
-      pipe.textContent = '|';
-      copyrightWrapper.append(pipe, socialUl);
-      socialSection.remove();
+  // Section 0: full-width promo hero image band (sits above the footer content).
+  if (sections[0]) {
+    const heroImg = sections[0].querySelector('picture, img');
+    if (heroImg) {
+      const band = document.createElement('div');
+      band.className = 'footer-hero-band';
+      band.append(heroImg.closest('picture') || heroImg);
+      block.append(band);
     }
   }
+
+  const footer = document.createElement('div');
+  footer.className = 'footer-inner';
+
+  // Section 1: primary link row.
+  if (sections[1]) {
+    const linkRow = document.createElement('div');
+    linkRow.className = 'footer-links';
+    const ul = sections[1].querySelector('ul');
+    if (ul) linkRow.append(ul);
+    footer.append(linkRow);
+  }
+
+  // Section 2: centered brand logo.
+  if (sections[2]) {
+    const brand = document.createElement('div');
+    brand.className = 'footer-brand';
+    const img = sections[2].querySelector('picture, img');
+    if (img) brand.append(img.closest('picture') || img);
+    footer.append(brand);
+  }
+
+  // Section 3: bottom legal bar (DRiV logo + legal links).
+  if (sections[3]) {
+    const bottom = document.createElement('div');
+    bottom.className = 'footer-bottom';
+    const logoLink = sections[3].querySelector('p a, p picture, p img');
+    if (logoLink) {
+      const driv = document.createElement('div');
+      driv.className = 'footer-driv';
+      driv.append(logoLink.closest('a') || logoLink);
+      bottom.append(driv);
+    }
+    const ul = sections[3].querySelector('ul');
+    if (ul) {
+      ul.className = 'footer-legal';
+      bottom.append(ul);
+    }
+    footer.append(bottom);
+  }
+
+  block.append(footer);
 }

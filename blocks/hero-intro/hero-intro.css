@@ -1,0 +1,123 @@
+/* Hero (intro) variant - Monroe brand.
+   Centered, text-only statement on a dark (#0e0e0e) band: uppercase condensed
+   heading (2nd word yellow) + body paragraph + yellow "FIND MY PART" CTA.
+   Values extracted from source computed styles at www.monroe.com. */
+
+/* Full-bleed dark band: override EDS section wrapper max-width so the
+   dark background spans the viewport (source bg comes from a full-width parent). */
+main > .section:has(.hero-intro) {
+  background-color: var(--monroe-bg-dark);
+  padding-block: 0;
+}
+
+main > .section:has(.hero-intro) > .hero-intro-wrapper {
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ----- Block (mobile-first) ----- */
+.hero-intro {
+  padding: 0 20px 80px;
+  text-align: center;
+  color: #fff;
+  background-color: var(--monroe-bg-dark);
+}
+
+/* The single content cell: constrain to the narrow centered column. */
+.hero-intro > div > div {
+  max-width: 768px;
+  margin: 0 auto;
+}
+
+/* Heading: uppercase condensed-bold, white with yellow second word.
+   Source weight computes as 100 for the proprietary face; Oswald fallback uses 700. */
+.hero-intro h2 {
+  margin: 0 0 20px;
+  font-family: var(--monroe-heading-font);
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 1.15;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* Yellow accent applied to the second word (wrapped by hero-intro.js). */
+.hero-intro h2 .hero-intro-accent {
+  color: var(--monroe-yellow);
+}
+
+/* Suppress the global boilerplate h2::after accent rule (small gradient bar
+   from lazy-styles.css). It has higher specificity, so !important is required. */
+.hero-intro h2::after {
+  content: none !important;
+}
+
+/* Body paragraph: Open Sans, centered, constrained column. */
+.hero-intro p {
+  margin: 0 auto 20px;
+  max-width: 768px;
+  font-family: var(--monroe-body-font);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 28px;
+  color: #fff;
+}
+
+/* Call-to-action button: yellow fill, dark text, condensed uppercase.
+   High specificity + reset of the global a.button shimmer/border/padding. */
+main .hero-intro a.button:any-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: var(--monroe-button-radius);
+  background-color: var(--monroe-yellow);
+  background-image: none;
+  color: var(--monroe-button-text);
+  font-family: var(--monroe-heading-font);
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 21px;
+  letter-spacing: 0.35px;
+  text-transform: uppercase;
+  text-decoration: none;
+  box-shadow: none;
+  transition: background-color 0.3s ease;
+}
+
+main .hero-intro a.button:any-link::after {
+  content: none;
+}
+
+main .hero-intro a.button:any-link:hover,
+main .hero-intro a.button:any-link:focus-visible {
+  background-color: var(--monroe-yellow);
+  border: 0;
+  color: var(--monroe-button-text);
+  box-shadow: none;
+  transform: none;
+  filter: brightness(0.92);
+}
+
+/* ----- Desktop (>= 900px) ----- */
+@media (width >= 900px) {
+  .hero-intro h2 {
+    font-size: 72px;
+    letter-spacing: 1.8px;
+  }
+
+  .hero-intro p {
+    line-height: 30px;
+  }
+
+  main .hero-intro a.button:any-link {
+    padding: 8px 24px;
+    font-size: 24px;
+    line-height: 32px;
+    letter-spacing: 0.6px;
+  }
+}

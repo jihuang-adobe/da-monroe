@@ -1,0 +1,202 @@
+/* Cards (tout) variant - Monroe brand product touts on a dark background.
+   Source: monroe.com homepage product touts.
+   Values extracted from source computed styles; brand vars from styles/brand.css. */
+
+.cards-tout {
+  position: relative;
+  padding-bottom: 64px;
+}
+
+/* Subtle radial yellow glow behind the touts.
+   Source: bg-[radial-gradient(ellipse 80% 50% at 50% 50%, rgba(255,209,0,0.2) 0%, transparent 80%)]
+   on an absolutely positioned -inset-5 (-20px) layer. */
+.cards-tout::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  background: radial-gradient(ellipse 80% 50% at 50% 50%, rgb(255 209 0 / 20%) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Card list: mobile-first single column, 32px gap (source gap-8).
+   Constrained and centered (the section is full-bleed for the hero). */
+.cards-tout > ul {
+  position: relative;
+  z-index: 1;
+  list-style: none;
+  margin: 0 auto;
+  padding: 0 20px;
+  max-width: 1640px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Each tout card. Dark gray surface shows behind media that does not fully
+   cover (e.g. video cards with a centered product image). */
+.cards-tout > ul > li {
+  position: relative;
+  min-height: 160px;
+  border-radius: var(--monroe-card-radius);
+  overflow: hidden;
+  background-color: var(--monroe-tout-gray);
+}
+
+/* Whole card is a single clickable link. Source: block hover:opacity-70
+   transition-opacity duration-300. */
+.cards-tout-card-link {
+  display: block;
+  position: relative;
+  height: 100%;
+  min-height: inherit;
+  padding: 16px;
+  text-decoration: none;
+  color: #fff;
+  transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cards-tout-card-link:hover,
+.cards-tout-card-link:focus-visible {
+  opacity: 0.7;
+}
+
+/* Media background (image or video) fills the card edge-to-edge.
+   Source: img.w-full.h-full.object-cover.absolute.inset-0. */
+.cards-tout-card-image {
+  position: absolute;
+  inset: 0;
+  line-height: 0;
+}
+
+.cards-tout-card-image img,
+.cards-tout-card-image video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Text overlay sits above the media (source: div.relative). */
+.cards-tout-card-body {
+  position: relative;
+  z-index: 1;
+}
+
+/* Video cards: title/LEARN MORE sit in a top header, video fills below
+   (source: tout-video-card stacks header over the video, not overlaid). */
+.cards-tout-card-video .cards-tout-card-link {
+  display: flex;
+  flex-direction: column;
+}
+
+.cards-tout-card-video .cards-tout-card-body {
+  order: 0;
+  padding-bottom: 16px;
+}
+
+.cards-tout-card-video .cards-tout-card-image {
+  position: relative;
+  inset: auto;
+  order: 1;
+  flex: 1;
+
+  /* Stretch the video edge-to-edge below the header (counter card padding). */
+  margin: 0 -16px -16px;
+}
+
+/* Product heading. Source: text-xl (20px) mobile, md:text-4xl (36px) desktop,
+   font-bold, condensed-bold font, white, left-aligned, uppercase. */
+.cards-tout-card-body h2,
+.cards-tout-card-body h3 {
+  margin: 0;
+  font-family: var(--monroe-heading-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: left;
+  line-height: 1.4;
+  font-size: 26px;
+  color: #fff;
+}
+
+/* "LEARN MORE" label + yellow right-pointing triangle.
+   Source: span.flex.items-center.gap-1.text-sm (14px) mobile / md:text-xl (20px). */
+.cards-tout-card-body p,
+.cards-tout-card-body a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0;
+  font-family: var(--monroe-heading-font);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: normal;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cards-tout-card-body p::after,
+.cards-tout-card-body a::after {
+  content: '';
+  width: 0;
+  height: 0;
+  margin-bottom: 1px;
+  border-left: 6px solid var(--monroe-yellow);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+
+/* Desktop: two cards per row with alternating 2/3 + 1/3 widths.
+   Source: md:flex-row, [&>*:nth-child(odd)]:md:w-2/3,
+   [&>*:nth-child(even)]:md:w-1/3, md:gap-4 (16px). */
+@media (width >= 900px) {
+  .cards-tout > ul {
+    flex-flow: row wrap;
+    align-items: stretch;
+    gap: 16px;
+  }
+
+  .cards-tout > ul > li {
+    min-height: 280px;
+  }
+
+  /* Two items share a row separated by one 16px gap. */
+  .cards-tout > ul > li:nth-child(odd) {
+    flex: 0 0 calc(66.666% - 10.667px);
+  }
+
+  .cards-tout > ul > li:nth-child(even) {
+    flex: 0 0 calc(33.333% - 5.333px);
+  }
+
+  /* Row 2 alternates: wide card moves to the right, narrow to the left
+     (source row 2 uses md:flex-row-reverse). Reorder via flex order so the
+     nth-child width rules above still apply to the correct cards. */
+  .cards-tout > ul > li:nth-child(3) {
+    order: 2;
+  }
+
+  .cards-tout > ul > li:nth-child(4) {
+    order: 1;
+  }
+
+  .cards-tout-card-link {
+    padding: 24px;
+  }
+
+  /* Match the larger desktop padding for the video card's full-bleed media. */
+  .cards-tout-card-video .cards-tout-card-image {
+    margin: 0 -24px -24px;
+  }
+
+  .cards-tout-card-body h2,
+  .cards-tout-card-body h3 {
+    font-size: 48px;
+    line-height: 48px;
+  }
+
+  .cards-tout-card-body p,
+  .cards-tout-card-body a {
+    font-size: 20px;
+  }
+}
