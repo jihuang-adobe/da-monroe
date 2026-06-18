@@ -31,6 +31,53 @@
           ]
         }
       ]
+    },
+    {
+      "name": "product-category",
+      "urls": [
+        "https://www.monroe.com/products/restore-your-ride.html"
+      ],
+      "representativeUrl": "https://www.monroe.com/products/restore-your-ride.html",
+      "coverageGaps": [],
+      "description": "Monroe product category page: intro heading, product feature cards, comparison table, buying-guide card, Find My Part search",
+      "blocks": [
+        {
+          "name": "hero-banner",
+          "instances": [
+            "#page-content div.header-hero.parbase"
+          ]
+        },
+        {
+          "name": "cards",
+          "instances": [
+            "#page-content div.tout.parbase"
+          ]
+        },
+        {
+          "name": "banner",
+          "instances": [
+            "#page-content div.updated-tout"
+          ]
+        },
+        {
+          "name": "table",
+          "instances": [
+            "#page-content div.table-scroll-wrapper table"
+          ]
+        },
+        {
+          "name": "columns-callout",
+          "instances": [
+            "#page-content div.fmmp-plaintext"
+          ]
+        },
+        {
+          "name": "columns-finder",
+          "instances": [
+            "#page-content div.driv-part-finder-main.parbase"
+          ]
+        }
+      ]
     }
   ]
 }

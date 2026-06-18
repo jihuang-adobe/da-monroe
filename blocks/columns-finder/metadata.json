@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-finder",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-06-18T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.monroe.com/products/restore-your-ride.html",
+    "originPage": "Restore Your Ride product-category page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "spacious",
+    "purpose": "part-finder",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "two side-by-side search panels (Search by Vehicle | Search by Part Number)",
+    "buttonCount": 2,
+    "imageCount": 0,
+    "videoCount": 0,
+    "layout": "two equal columns, each a bordered search panel"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "static placeholder for a dynamic part/vehicle finder widget",
+      "two-panel search UI captured as headings + labels (live JS not migrated)"
+    ],
+    "notSuitableFor": [
+      "general two-column text/image layouts (use base columns)",
+      "callout cards (use columns-callout)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/products/restore-your-ride"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-18T00:00:00.000Z"
+  }
+}

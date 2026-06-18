@@ -1,22 +1,33 @@
+/*
+ * Table Block — Monroe comparison-table styling
+ * Source: https://www.monroe.com/products/restore-your-ride.html
+ * Yellow header row, centered body cells, thin gray grid lines, no striping.
+ * https://www.hlx.live/developer/block-collection/table
+ */
+
 .table {
-  --table-border-color: light-dark(var(--color-gray-200), rgb(245 242 237 / 12%));
+  --table-grid-color: rgb(221 221 221);
+  --table-header-bg: var(--monroe-yellow, #ffd100);
+  --table-text-color: var(--monroe-bg-dark, #0e0e0e);
 
   width: 100%;
+
+  /* horizontal scroll on small screens */
   overflow-x: auto;
-  border-radius: 12px;
+  -webkit-overflow-scrolling: touch;
 }
 
 .table table {
   width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-  font-size: var(--body-font-size-xs);
-}
 
-@media (width >= 600px) {
-  .table table {
-    font-size: var(--body-font-size-s);
-  }
+  /* keep columns readable; force horizontal scroll on narrow viewports */
+  min-width: 720px;
+  border-collapse: collapse;
+  border-bottom: 1px solid var(--table-grid-color);
+  font-family: var(--monroe-body-font, "Open Sans", arial, sans-serif);
+  font-size: var(--body-font-size-s);
+  color: var(--table-text-color);
+  background-color: transparent;
 }
 
 @media (width >= 900px) {
@@ -25,37 +36,32 @@
   }
 }
 
-.table table th {
-  font-weight: 700;
-}
-
-.table table th,
-.table table td {
-  padding: 0.75em 0.85em;
-  text-align: left;
-}
-
-.table table thead tr {
-  border-top: 2px solid var(--table-border-color);
-  border-bottom: 2px solid var(--table-border-color);
-}
-
+/* Header row: Monroe yellow band, condensed bold uppercase, no borders */
 .table table thead th {
-  font-family: var(--body-font-family);
-  font-weight: 700;
-  font-size: 0.85em;
+  padding: 15px;
+  text-align: left;
+  vertical-align: middle;
+  font-family: var(--monroe-heading-font, oswald, sans-serif);
+  font-weight: 500;
+  font-size: var(--body-font-size-l);
+  line-height: 1;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: light-dark(var(--color-ink), var(--color-parchment));
+  letter-spacing: 1px;
+  color: var(--table-text-color);
+  background-color: var(--table-header-bg);
+  border: 0;
 }
 
-.table table tbody tr {
-  border-bottom: 1px solid var(--table-border-color);
-  transition: background-color 0.2s;
-}
-
-.table table tbody tr:hover {
-  background-color: light-dark(rgb(161 79 43 / 4%), rgb(197 160 89 / 5%));
+/* Body cells: centered text, thin grid lines, no striping */
+.table table tbody td {
+  padding: 15px;
+  text-align: center;
+  vertical-align: middle;
+  font-family: var(--monroe-body-font, "Open Sans", arial, sans-serif);
+  font-weight: 400;
+  color: var(--table-text-color);
+  background-color: transparent;
+  border: 1px solid var(--table-grid-color);
 }
 
 .table table th p,
@@ -67,22 +73,7 @@
   margin-top: 0.25em;
 }
 
-/* no header variant */
-.table.no-header table tbody tr {
-  border-top: 1px solid var(--table-border-color);
-}
-
-/* striped variant */
-.table.striped tbody tr:nth-child(odd) {
-  background-color: var(--light-color);
-}
-
-.table.striped tbody tr:nth-child(odd):hover {
-  background-color: light-dark(rgb(161 79 43 / 6%), rgb(197 160 89 / 8%));
-}
-
-/* bordered variant */
-.table.bordered table th,
-.table.bordered table td {
-  border: 1px solid var(--table-border-color);
+/* no-header variant: top border on first body row to close the grid */
+.table.no-header table tbody tr:first-child td {
+  border-top: 1px solid var(--table-grid-color);
 }

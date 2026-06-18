@@ -1,0 +1,39 @@
+{
+  "variantName": "columns-callout",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-06-18T00:00:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.monroe.com/products/restore-your-ride.html",
+    "originPage": "Restore Your Ride product-category page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "callout",
+    "imagePattern": "icon"
+  },
+  "contentPattern": {
+    "structure": "logo image + heading + paragraph + CTA, centered",
+    "buttonCount": 1,
+    "imageCount": 1,
+    "videoCount": 0,
+    "layout": "single centered column on a dark band"
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "centered callout cards with a small logo/icon, heading, paragraph and one CTA",
+      "dark-band promotional callouts (e.g., buying guide, resource links)"
+    ],
+    "notSuitableFor": [
+      "multi-column side-by-side text/image layouts (use base columns)",
+      "product card grids (use cards)"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/products/restore-your-ride"],
+    "reuseCount": 1,
+    "lastUsed": "2026-06-18T00:00:00.000Z"
+  }
+}

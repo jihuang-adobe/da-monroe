@@ -17,6 +17,12 @@ async function fetchFooter() {
   const html = await resp.text();
   const tmp = document.createElement('div');
   tmp.innerHTML = html;
+  // Fragment image paths are relative to /content; make them absolute so they
+  // resolve on any page depth.
+  tmp.querySelectorAll('img[src^="images/"], source[srcset^="images/"]').forEach((el) => {
+    if (el.src) el.setAttribute('src', `/content/${el.getAttribute('src')}`);
+    if (el.getAttribute('srcset')) el.setAttribute('srcset', `/content/${el.getAttribute('srcset')}`);
+  });
   return tmp;
 }
 

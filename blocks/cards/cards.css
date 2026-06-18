@@ -254,3 +254,162 @@
     max-height: 300px;
   }
 }
+
+/* ==========================================================================
+   Monroe product-tout variant
+   --------------------------------------------------------------------------
+   Source: monroe.com "Restore Your Ride" product touts. Each product is
+   authored as its own one-row .cards block, so the multi-column grid is
+   formed across consecutive .cards-wrapper siblings in a single section.
+   Values extracted from div.tout computed styles (see
+   migration-work/cards-extracted.css). Scoped so it ONLY engages when 2+
+   cards blocks are adjacent — single-card and bento/links usages are
+   unaffected.
+   ========================================================================== */
+
+/* Lay consecutive product-card blocks out as a responsive grid.
+   Only matches a section holding 2+ back-to-back .cards-wrapper siblings. */
+.section:has(> .cards-wrapper + .cards-wrapper) {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2xl) var(--space-l);
+  align-items: start;
+  box-sizing: border-box;
+  max-width: var(--monroe-content-width);
+  margin-inline: auto;
+  padding-inline: var(--content-padding-inline);
+}
+
+/* Non-card children of that section keep full width and their own inner padding */
+.section:has(> .cards-wrapper + .cards-wrapper) > :not(.cards-wrapper) {
+  grid-column: 1 / -1;
+  max-width: var(--grid-container-width);
+  margin-inline: auto;
+}
+
+/* Each product card block fills its grid cell, no inherited block spacing */
+.section:has(> .cards-wrapper + .cards-wrapper) > .cards-wrapper {
+  margin: 0;
+  max-width: none;
+}
+
+/* The product tout itself: one centered card per block */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul {
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: none;
+  margin-inline: 0;
+  height: 100%;
+}
+
+.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li {
+  height: 100%;
+  border: 1px solid light-dark(rgb(14 14 14 / 8%), rgb(245 242 237 / 12%));
+  border-radius: var(--monroe-card-radius);
+  background: light-dark(#fff, var(--monroe-tout-gray));
+  box-shadow: 0 2px 10px light-dark(rgb(14 14 14 / 6%), rgb(0 0 0 / 35%));
+  text-align: center;
+}
+
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link {
+  align-items: center;
+  cursor: pointer;
+}
+
+/* Product image: contained square photo, centered, white plate */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image {
+  width: 100%;
+  padding: var(--space-l) var(--space-l) 0;
+  box-sizing: border-box;
+  background: transparent;
+}
+
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image img {
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+/* Body: centered text */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-l);
+  flex-grow: 1;
+}
+
+/* Product heading — Oswald condensed, uppercase, dark */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body :is(h2, h3, h4) {
+  font-family: var(--monroe-heading-font);
+  font-weight: 600;
+  font-size: 28px;
+  line-height: 1.2;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: light-dark(var(--monroe-bg-dark), #fff);
+  margin: 0 0 var(--space-m);
+}
+
+/* Description — Open Sans, dark gray, generous line-height */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p {
+  font-family: var(--monroe-body-font);
+  font-size: var(--body-font-size-m);
+  line-height: 1.7;
+  color: light-dark(var(--monroe-bg-dark), rgb(245 242 237 / 80%));
+  margin: 0 0 var(--space-m);
+}
+
+/* Push the CTA paragraph to the bottom so cards align */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p:last-child {
+  margin-top: auto;
+  margin-bottom: 0;
+  padding-top: var(--space-s);
+}
+
+/* "VIEW PRODUCT" — dark solid Monroe button */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link {
+  display: inline-block;
+  padding: 18px 28px;
+  border: 1px solid var(--monroe-bg-dark);
+  border-radius: var(--monroe-button-radius);
+  background-color: var(--monroe-bg-dark);
+  color: #fff;
+  font-family: var(--monroe-heading-font);
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link:hover,
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link:hover .cards-card-body a:any-link {
+  background-color: var(--monroe-yellow);
+  border-color: var(--monroe-yellow);
+  color: var(--monroe-button-text);
+}
+
+/* Subtle lift on hover of the whole card */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px light-dark(rgb(14 14 14 / 12%), rgb(0 0 0 / 45%));
+  border-color: light-dark(rgb(14 14 14 / 14%), rgb(245 242 237 / 22%));
+}
+
+/* Tablet: 2 columns */
+@media (width >= 600px) {
+  .section:has(> .cards-wrapper + .cards-wrapper) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Desktop: 3 columns (matches source ~480px touts at 1440px) */
+@media (width >= 900px) {
+  .section:has(> .cards-wrapper + .cards-wrapper) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "url": "https://www.monroe.com/products/restore-your-ride.html",
+  "path": "products/restore-your-ride",
+  "timestamp": "2026-06-18T15:45:53.100Z",
+  "title": "OE Quality Shocks & Strut Assemblies | Monroe Shocks & Struts",
+  "template": "product-category",
+  "blocks": [
+    "hero-banner",
+    "cards",
+    "cards",
+    "cards",
+    "cards",
+    "cards",
+    "cards",
+    "banner",
+    "banner",
+    "table",
+    "columns-callout",
+    "columns-finder"
+  ]
+}

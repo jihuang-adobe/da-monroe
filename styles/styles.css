@@ -272,12 +272,7 @@ body {
   display: none;
   margin: 0;
   box-sizing: border-box;
-  background-color: var(--background-color);
-  background-image:
-    radial-gradient(ellipse 80% 50% at 12% 8%,
-      light-dark(rgb(197 160 89 / 9%), rgb(197 160 89 / 4%)) 0%, transparent 60%),
-    radial-gradient(ellipse 55% 40% at 88% 82%,
-      light-dark(rgb(161 79 43 / 6%), rgb(161 79 43 / 3%)) 0%, transparent 50%);
+  background-color: #fff;
   color: var(--text-color);
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
@@ -583,8 +578,6 @@ main img:not([width], [height]) {
 }
 
 main > .section:first-child {
-  padding-block-start: 0;
-
   /* Reduce CLS: contain layout so section appearance causes less reflow.
      Exclude social-share section: contain creates a containing block for position:fixed,
      which would break the sticky share buttons. */
@@ -593,6 +586,11 @@ main > .section:first-child {
 
 main > .section:has(.social-share) {
   contain: none;
+}
+
+/* Full-bleed hero as the first section sits flush under the nav. */
+main > .section:first-child:has(.hero-video) {
+  padding-block-start: 0;
 }
 
 main > .section > div,
