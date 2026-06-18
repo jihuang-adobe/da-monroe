@@ -1,18 +1,19 @@
-/* Banner block — Monroe full-width promo banner: image one side, text the
-   other. Values from monroe.com product-category Accessories banner. */
+/* Banner block — light & minimal Accessories promo.
+   Soft neutral panel, image on one side, thin dark heading + light copy + a
+   minimal yellow-accented CTA on the other. Replaces the former full-bleed
+   black band. */
 
 .banner {
-  position: relative;
+  --bn-ink: #1a1a1a;
+  --bn-muted: #6b6b6b;
+  --bn-accent: var(--monroe-yellow, #ffd100);
 
-  /* Full-bleed: break out of the section content max-width and span the
-     viewport edge-to-edge, independent of parent centering. */
+  position: relative;
   width: 100vw;
   max-width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-
-  /* Dark band — sits full-bleed on the page background. */
-  background: var(--monroe-bg-dark, #0e0e0e);
+  background: #fff;
 }
 
 .banner > div {
@@ -20,27 +21,33 @@
   flex-direction: column;
   align-items: stretch;
   overflow: hidden;
-
-  /* Keep the image + text content centered within the page width. */
   max-width: var(--monroe-content-width, 1200px);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 24px;
+}
+
+/* Inner surface: soft rounded neutral card */
+.banner .banner-media,
+.banner .banner-body {
+  background: #f7f7f7;
 }
 
 /* Media side */
 .banner .banner-media {
   line-height: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
 }
 
 .banner .banner-media img {
   display: block;
   width: 100%;
-  max-width: 480px;
+  max-width: 420px;
   height: auto;
   margin: 0 auto;
   object-fit: contain;
-
-  /* override global main img 16/9 crop */
   aspect-ratio: auto;
 }
 
@@ -49,75 +56,100 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 32px;
-  color: #fff;
+  gap: 18px;
+  padding: 40px 32px;
+  color: var(--bn-ink);
+}
+
+/* thin yellow accent rule */
+.banner .banner-body::before {
+  content: "";
+  width: 48px;
+  height: 3px;
+  background: var(--bn-accent);
+  border-radius: 2px;
 }
 
 .banner .banner-body :is(h1, h2, h3, h4) {
-  margin: 0 0 20px;
+  margin: 0;
   font-family: var(--monroe-heading-font);
-  font-weight: 600;
-  font-size: 36px;
+  font-weight: 300;
+  font-size: 34px;
   line-height: 1.1;
-  text-transform: uppercase;
-  color: #fff;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: var(--bn-ink);
 }
 
 .banner .banner-body p {
-  margin: 0 0 15px;
+  margin: 0;
+  max-width: 48ch;
   font-family: var(--monroe-body-font);
   font-size: 16px;
-  line-height: 1.875;
+  font-weight: 300;
+  line-height: 1.75;
+  color: var(--bn-muted);
 }
 
-/* CTA — yellow Monroe button */
+/* CTA — minimal underlined link with arrow */
 .banner a.banner-cta:any-link {
   align-self: flex-start;
-  margin-top: 10px;
-  padding: 25px 43px;
-  background: var(--monroe-yellow, #ffd100);
-  color: var(--monroe-button-text, #212121);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+  padding: 6px 0 8px;
+  background: none;
+  color: var(--bn-ink);
   border: 0;
-  border-radius: 5px;
-  font-family: var(--monroe-heading-font);
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 1;
-  letter-spacing: 0.4px;
+  border-bottom: 2px solid var(--bn-accent);
+  border-radius: 0;
+  font-family: var(--monroe-body-font);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: filter 0.3s ease;
+  transition: gap 0.3s ease, color 0.3s ease;
 }
 
-.banner a.banner-cta:any-link::after { content: none; }
+.banner a.banner-cta:any-link::after {
+  content: "\2192";
+  font-size: 15px;
+  transition: transform 0.3s ease;
+}
 
 .banner a.banner-cta:any-link:hover {
-  filter: brightness(0.92);
+  gap: 12px;
+  color: #000;
 }
 
-/* Desktop: image left, text right, equal halves. */
+.banner a.banner-cta:any-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* Desktop: image left, text right, soft rounded unified surface */
 @media (width >= 900px) {
   .banner > div {
     flex-direction: row;
-    align-items: center;
-    min-height: 420px;
-    padding: 64px 24px;
+    align-items: stretch;
+    min-height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    padding: 0;
   }
 
   .banner .banner-media {
-    display: flex;
     flex: 1 1 50%;
-    align-items: center;
-    justify-content: center;
+    padding: 48px;
   }
 
   .banner .banner-body {
     flex: 1 1 50%;
-    padding: 0 0 0 32px;
+    padding: 64px 56px;
   }
 
   .banner .banner-body :is(h1, h2, h3, h4) {
-    font-size: 50px;
-    line-height: 55px;
+    font-size: 46px;
   }
 }

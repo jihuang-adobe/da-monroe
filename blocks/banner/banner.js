@@ -8,6 +8,8 @@
  *
  * @param {Element} block The banner block element
  */
+import { revealOnScroll } from '../../scripts/shared.js';
+
 export default function decorate(block) {
   const row = block.querySelector(':scope > div');
   if (!row) return;
@@ -23,4 +25,6 @@ export default function decorate(block) {
     const cta = bodyCell.querySelector('a');
     if (cta) cta.classList.add('banner-cta');
   }
+
+  revealOnScroll([mediaCell, bodyCell].filter(Boolean), { threshold: 0.15, stagger: 120 });
 }

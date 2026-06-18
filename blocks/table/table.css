@@ -1,73 +1,87 @@
 /*
- * Table Block — Monroe comparison-table styling
- * Source: https://www.monroe.com/products/restore-your-ride.html
- * Yellow header row, centered body cells, thin gray grid lines, no striping.
- * https://www.hlx.live/developer/block-collection/table
+ * Table Block — light & minimal comparison table.
+ * No heavy yellow band: clean header with a thin underline, airy cell padding,
+ * hairline row separators, subtle row hover, yellow checkmarks.
  */
 
 .table {
-  --table-grid-color: rgb(221 221 221);
-
-  /* source header band renders a brighter yellow than the brand token */
-  --table-header-bg: #ffdf1c;
-  --table-text-color: var(--monroe-bg-dark, #0e0e0e);
+  --table-ink: #1a1a1a;
+  --table-muted: #6b6b6b;
+  --table-line: #ececec;
+  --table-accent: var(--monroe-yellow, #ffd100);
 
   width: 100%;
-
-  /* horizontal scroll on small screens */
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
 }
 
 .table table {
   width: 100%;
-
-  /* keep columns readable; force horizontal scroll on narrow viewports */
   min-width: 720px;
   border-collapse: collapse;
-  border-bottom: 1px solid var(--table-grid-color);
   font-family: var(--monroe-body-font, "Open Sans", arial, sans-serif);
-  font-size: var(--body-font-size-s);
-  color: var(--table-text-color);
+  font-size: 15px;
+  color: var(--table-ink);
   background-color: transparent;
 }
 
-@media (width >= 900px) {
-  .table table {
-    font-size: var(--body-font-size-m);
-  }
-}
-
-/* Header row: Monroe yellow band, condensed bold uppercase, no borders */
+/* Header: no fill, thin dark underline, light uppercase label */
 .table table thead th {
-  padding: 15px;
-  text-align: left;
-  vertical-align: middle;
+  padding: 18px 20px;
+  text-align: center;
+  vertical-align: bottom;
   font-family: var(--monroe-heading-font, oswald, sans-serif);
-  font-weight: 500;
-  font-size: var(--body-font-size-l);
-  line-height: 1;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.25;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  color: var(--table-text-color);
-  background-color: var(--table-header-bg);
+  letter-spacing: 0.06em;
+  color: var(--table-ink);
+  background-color: transparent;
   border: 0;
+  border-bottom: 2px solid var(--table-ink);
 }
 
-/* Body cells: centered text, thin grid lines, no striping */
+/* first header cell (row labels column) stays empty/left */
+.table table thead th:first-child {
+  text-align: left;
+}
+
+/* Body cells: airy padding, hairline bottom rule only, centered values */
 .table table tbody td {
-  padding: 15px;
+  padding: 18px 20px;
   text-align: center;
   vertical-align: middle;
-  font-family: var(--monroe-body-font, "Open Sans", arial, sans-serif);
-
-  /* source uses a fixed 16px body cell, not the responsive token */
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--table-text-color);
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.4;
+  color: var(--table-muted);
   background-color: transparent;
-  border: 1px solid var(--table-grid-color);
+  border: 0;
+  border-bottom: 1px solid var(--table-line);
+  font-variant-emoji: text;
+}
+
+/* Value columns: checkmarks rendered in the brand accent */
+.table table tbody td:not(:first-child) {
+  color: var(--table-accent);
+  font-size: 18px;
+}
+
+/* Row-label (first) column: left-aligned, darker, slightly heavier */
+.table table tbody td:first-child {
+  text-align: left;
+  color: var(--table-ink);
+  font-weight: 400;
+}
+
+/* Subtle row hover */
+.table table tbody tr {
+  transition: background-color 0.25s ease;
+}
+
+.table table tbody tr:hover {
+  background-color: #fafafa;
 }
 
 .table table th p,
@@ -81,5 +95,5 @@
 
 /* no-header variant: top border on first body row to close the grid */
 .table.no-header table tbody tr:first-child td {
-  border-top: 1px solid var(--table-grid-color);
+  border-top: 1px solid var(--table-line);
 }

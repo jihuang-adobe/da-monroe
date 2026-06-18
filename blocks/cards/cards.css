@@ -302,13 +302,22 @@
   height: 100%;
 }
 
+/* Light, airy card: hairline border, soft radius, gentle hover lift */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li {
   height: 100%;
-  border: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
+  border: 1px solid #ececec;
+  border-radius: 16px;
+  background: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 4%);
   text-align: start;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 18px 40px rgb(0 0 0 / 8%);
+  border-color: #e0e0e0;
 }
 
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link {
@@ -316,96 +325,102 @@
   cursor: pointer;
 }
 
-/* Product image: contained square photo, centered, no plate (matches source) */
+/* Product image: contained photo on a soft neutral panel */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image {
   width: 100%;
-  padding: 0;
+  padding: 32px;
   box-sizing: border-box;
-  background: transparent;
+  background: #fafafa;
 }
 
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image img {
-  width: 258px;
+  width: 220px;
   max-width: 100%;
-  height: 258px;
+  height: 220px;
   object-fit: contain;
   margin-inline: auto;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* No image zoom on hover for flat product cards */
+/* Subtle zoom on hover */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover .cards-card-image img {
-  transform: none;
+  transform: scale(1.04);
 }
 
-/* Body: left-aligned text, CTA centered (matches source) */
+/* Body: left-aligned, generous padding */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body {
   display: flex;
   flex-direction: column;
   align-items: stretch;
-  padding: var(--space-l) 0 0;
+  padding: 28px 28px 32px;
   flex-grow: 1;
   text-align: start;
 }
 
-/* Product heading — Oswald condensed, uppercase, dark, source 30px/36px */
+/* Product heading — thin, sentence case, dark ink */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body :is(h2, h3, h4) {
   font-family: var(--monroe-heading-font);
-  font-weight: 600;
-  font-size: 30px;
-  line-height: 36px;
-  text-transform: uppercase;
-  letter-spacing: 0.01em;
-  color: light-dark(var(--monroe-bg-dark), #fff);
-  margin: 0 0 20px;
+  font-weight: 300;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  color: #1a1a1a;
+  margin: 0 0 14px;
 }
 
-/* Description — Open Sans, dark, source 16px/30px */
+/* Description — light grey, airy line-height */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p {
   font-family: var(--monroe-body-font);
-  font-size: 16px;
-  line-height: 30px;
-  color: light-dark(var(--monroe-bg-dark), rgb(245 242 237 / 80%));
-  margin: 0 0 15px;
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: #6b6b6b;
+  margin: 0 0 16px;
 }
 
-/* Push the CTA paragraph to the bottom so cards align; center the button */
+/* CTA pinned to the bottom, left-aligned as a minimal text link with arrow */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p:last-child {
   margin-top: auto;
   margin-bottom: 0;
   padding-top: var(--space-s);
-  text-align: center;
+  text-align: start;
 }
 
-/* "VIEW PRODUCT" — dark solid Monroe button, source padding 25px 20px / radius 5px */
+/* "VIEW PRODUCT" — minimal underlined link with yellow accent + arrow */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link {
-  display: inline-block;
-  padding: 25px 20px;
-  border: 1px solid var(--monroe-bg-dark);
-  border-radius: 5px;
-  background-color: var(--monroe-bg-dark);
-  color: #fff;
-  font-family: var(--monroe-heading-font);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0 8px;
+  border: 0;
+  border-bottom: 2px solid var(--monroe-yellow, #ffd100);
+  border-radius: 0;
+  background: none;
+  color: #1a1a1a;
+  font-family: var(--monroe-body-font);
   font-weight: 600;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-decoration: none;
-  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  transition: gap 0.3s ease, color 0.3s ease;
 }
 
-.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link:hover,
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link::after {
+  content: "\2192"; /* → */
+  font-size: 15px;
+  transition: transform 0.3s ease;
+}
+
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link:hover .cards-card-body a:any-link {
-  background-color: var(--monroe-yellow);
-  border-color: var(--monroe-yellow);
-  color: var(--monroe-button-text);
+  gap: 12px;
+  color: #000;
 }
 
-/* Flat cards (matches source) — no hover lift/shadow */
-.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover {
-  transform: none;
-  box-shadow: none;
-  border-color: transparent;
+.section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link:hover .cards-card-body a:any-link::after {
+  transform: translateX(3px);
 }
 
 /* Tablet: 2 columns */

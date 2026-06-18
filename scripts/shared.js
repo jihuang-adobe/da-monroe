@@ -325,6 +325,43 @@ export function getAllMetadata(scope, doc = document) {
 }
 
 /**
+ * Reveal elements on scroll. Adds a `reveal` class immediately and an
+ * `is-visible` class when each target enters the viewport, so CSS can animate
+ * a fade/slide-in. Respects prefers-reduced-motion (reveals immediately).
+ * @param {Element|Element[]|NodeList} targets - Element(s) to observe
+ * @param {{ threshold?: number, stagger?: number }} [options]
+ */
+export function revealOnScroll(targets, options = {}) {
+  const { threshold = 0.15, stagger = 0 } = options;
+  const list = [];
+  if (targets instanceof Element) list.push(targets);
+  else if (targets) list.push(...targets);
+  if (!list.length) return;
+
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  list.forEach((el, i) => {
+    el.classList.add('reveal');
+    if (stagger) el.style.setProperty('--reveal-delay', `${i * stagger}ms`);
+  });
+
+  if (reduce || typeof IntersectionObserver === 'undefined') {
+    list.forEach((el) => el.classList.add('is-visible'));
+    return;
+  }
+
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold, rootMargin: '0px 0px -10% 0px' });
+
+  list.forEach((el) => observer.observe(el));
+}
+
+/**
  * Check if the current page is in the Universal Editor.
  * @returns {boolean}
  */
