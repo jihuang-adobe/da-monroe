@@ -237,6 +237,24 @@
           }
         },
         {
+          "title": "Hero Intro",
+          "id": "hero-intro",
+          "model": "hero-intro",
+          "plugins": {
+            "da": {
+              "name": "hero-intro",
+              "rows": 1,
+              "columns": 1,
+              "fields": [
+                {
+                  "name": "text",
+                  "selector": "div>div"
+                }
+              ]
+            }
+          }
+        },
+        {
           "title": "Journey Map",
           "id": "journey-map",
           "model": "journey-map",

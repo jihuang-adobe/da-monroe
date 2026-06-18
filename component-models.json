@@ -330,6 +330,18 @@
     ]
   },
   {
+    "id": "hero-intro",
+    "fields": [
+      {
+        "component": "richtext",
+        "name": "text",
+        "label": "Text",
+        "valueType": "string",
+        "description": "Centered intro: heading + paragraph + CTA link. Use a line break in the heading to highlight the trailing line in the brand accent color."
+      }
+    ]
+  },
+  {
     "id": "journey-map-step",
     "fields": [
       {
