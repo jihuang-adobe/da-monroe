@@ -27,7 +27,7 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  gap: 24px;
+  gap: 30px;
   max-width: var(--monroe-content-width, 1200px);
   margin: 0 auto;
   padding: 0 24px;
@@ -42,12 +42,14 @@
   order: 1;
 }
 
-/* Monroe "M" logo — modest, intrinsic-ish size */
-.columns-callout img {
+/* Monroe "M" logo — modest, intrinsic-ish size (216 x ~97 on source) */
+.columns-callout .columns-callout-img-col picture,
+.columns-callout .columns-callout-img-col img {
   display: block;
-  width: auto;
+  width: 216px;
   max-width: 216px;
   height: auto;
+  max-height: 97px;
   margin: 0 auto;
   object-fit: contain;
 }
@@ -65,7 +67,7 @@
 
 /* Paragraph — Open Sans, white */
 .columns-callout p {
-  margin: 16px 0 0;
+  margin: 10px 0 0;
   font-family: var(--monroe-body-font);
   font-size: 16px;
   line-height: 22px;
@@ -74,7 +76,7 @@
 
 /* CTA button — yellow with dark text */
 .columns-callout .button-container {
-  margin: 24px 0 0;
+  margin: 40px 0 0;
 }
 
 .columns-callout a.button:any-link {

@@ -7,7 +7,9 @@
 
 .table {
   --table-grid-color: rgb(221 221 221);
-  --table-header-bg: var(--monroe-yellow, #ffd100);
+
+  /* source header band renders a brighter yellow than the brand token */
+  --table-header-bg: #ffdf1c;
   --table-text-color: var(--monroe-bg-dark, #0e0e0e);
 
   width: 100%;
@@ -58,7 +60,11 @@
   text-align: center;
   vertical-align: middle;
   font-family: var(--monroe-body-font, "Open Sans", arial, sans-serif);
+
+  /* source uses a fixed 16px body cell, not the responsive token */
+  font-size: 16px;
   font-weight: 400;
+  line-height: 1;
   color: var(--table-text-color);
   background-color: transparent;
   border: 1px solid var(--table-grid-color);

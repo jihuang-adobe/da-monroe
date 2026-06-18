@@ -93,41 +93,46 @@
   appearance: none;
   width: 100%;
   min-height: 52px;
-  padding: 0 60px 0 16px;
+  padding: 0 64px 0 20px;
   border: 1px solid #eee;
-  border-radius: 5px;
+  border-radius: 0;
   background-color: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
-  font-family: var(--monroe-body-font, "Open Sans");
+  box-shadow: none;
+  font-family: var(--monroe-heading-font, oswald);
   font-size: 16px;
-  color: #444;
+  text-transform: capitalize;
+  color: var(--monroe-bg-dark, #0e0e0e);
   cursor: pointer;
 }
 
 .columns-finder .finder-select:disabled {
-  color: #b0b0b0;
+  color: #9a9a9a;
   cursor: not-allowed;
-  background-color: #f7f7f7;
+  background-color: #f8f8f8;
 }
 
-/* Dark chevron box on the right of each select */
+/* Dark chevron box on the right of each select. Mirrors the source: black for
+   the active field, gray when the field is disabled. */
 .columns-finder .finder-field::after {
   content: "";
   position: absolute;
-  top: 1px;
-  right: 1px;
-  bottom: 1px;
-  width: 48px;
-  background-color: #3c3c3c;
-  border-radius: 0 4px 4px 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 50px;
+  background-color: var(--monroe-bg-dark, #0e0e0e);
   pointer-events: none;
+}
+
+.columns-finder .finder-field:has(.finder-select:disabled)::after {
+  background-color: #9a9a9a;
 }
 
 .columns-finder .finder-field::before {
   content: "";
   position: absolute;
   top: 50%;
-  right: 18px;
+  right: 19px;
   z-index: 1;
   width: 0;
   height: 0;
@@ -150,19 +155,20 @@
   flex: 1 1 auto;
   min-width: 0;
   min-height: 52px;
-  padding: 0 16px;
+  padding: 0 20px;
   border: 1px solid #eee;
   border-right: 0;
-  border-radius: 5px 0 0 5px;
+  border-radius: 0;
   background-color: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 6%);
-  font-family: var(--monroe-body-font, "Open Sans");
-  font-size: 16px;
-  color: #444;
+  box-shadow: none;
+  font-family: var(--monroe-heading-font, oswald);
+  font-size: 14px;
+  text-transform: uppercase;
+  color: var(--monroe-bg-dark, #0e0e0e);
 }
 
 .columns-finder .finder-input::placeholder {
-  color: #6b6b6b;
+  color: #8a8a8a;
   text-transform: uppercase;
 }
 
@@ -171,9 +177,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  min-height: 56px;
   padding: 18px 40px;
   border: 0;
-  border-radius: var(--monroe-button-radius, 6px);
+  border-radius: 5px;
   background-color: var(--monroe-yellow, #ffd100);
   color: var(--monroe-button-text, #212121);
   font-family: var(--monroe-heading-font, oswald);

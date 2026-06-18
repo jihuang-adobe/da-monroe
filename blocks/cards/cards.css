@@ -304,76 +304,84 @@
 
 .section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li {
   height: 100%;
-  border: 1px solid light-dark(rgb(14 14 14 / 8%), rgb(245 242 237 / 12%));
-  border-radius: var(--monroe-card-radius);
-  background: light-dark(#fff, var(--monroe-tout-gray));
-  box-shadow: 0 2px 10px light-dark(rgb(14 14 14 / 6%), rgb(0 0 0 / 35%));
-  text-align: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: start;
 }
 
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link {
-  align-items: center;
+  align-items: stretch;
   cursor: pointer;
 }
 
-/* Product image: contained square photo, centered, white plate */
+/* Product image: contained square photo, centered, no plate (matches source) */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image {
   width: 100%;
-  padding: var(--space-l) var(--space-l) 0;
+  padding: 0;
   box-sizing: border-box;
   background: transparent;
 }
 
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-image img {
-  width: 100%;
-  height: 240px;
+  width: 258px;
+  max-width: 100%;
+  height: 258px;
   object-fit: contain;
   margin-inline: auto;
 }
 
-/* Body: centered text */
+/* No image zoom on hover for flat product cards */
+.section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover .cards-card-image img {
+  transform: none;
+}
+
+/* Body: left-aligned text, CTA centered (matches source) */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  padding: var(--space-l);
+  align-items: stretch;
+  padding: var(--space-l) 0 0;
   flex-grow: 1;
+  text-align: start;
 }
 
-/* Product heading — Oswald condensed, uppercase, dark */
+/* Product heading — Oswald condensed, uppercase, dark, source 30px/36px */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body :is(h2, h3, h4) {
   font-family: var(--monroe-heading-font);
   font-weight: 600;
-  font-size: 28px;
-  line-height: 1.2;
+  font-size: 30px;
+  line-height: 36px;
   text-transform: uppercase;
   letter-spacing: 0.01em;
   color: light-dark(var(--monroe-bg-dark), #fff);
-  margin: 0 0 var(--space-m);
+  margin: 0 0 20px;
 }
 
-/* Description — Open Sans, dark gray, generous line-height */
+/* Description — Open Sans, dark, source 16px/30px */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p {
   font-family: var(--monroe-body-font);
-  font-size: var(--body-font-size-m);
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 30px;
   color: light-dark(var(--monroe-bg-dark), rgb(245 242 237 / 80%));
-  margin: 0 0 var(--space-m);
+  margin: 0 0 15px;
 }
 
-/* Push the CTA paragraph to the bottom so cards align */
+/* Push the CTA paragraph to the bottom so cards align; center the button */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-link .cards-card-body p:last-child {
   margin-top: auto;
   margin-bottom: 0;
   padding-top: var(--space-s);
+  text-align: center;
 }
 
-/* "VIEW PRODUCT" — dark solid Monroe button */
+/* "VIEW PRODUCT" — dark solid Monroe button, source padding 25px 20px / radius 5px */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards .cards-card-body a:any-link {
   display: inline-block;
-  padding: 18px 28px;
+  padding: 25px 20px;
   border: 1px solid var(--monroe-bg-dark);
-  border-radius: var(--monroe-button-radius);
+  border-radius: 5px;
   background-color: var(--monroe-bg-dark);
   color: #fff;
   font-family: var(--monroe-heading-font);
@@ -393,11 +401,11 @@
   color: var(--monroe-button-text);
 }
 
-/* Subtle lift on hover of the whole card */
+/* Flat cards (matches source) — no hover lift/shadow */
 .section:has(> .cards-wrapper + .cards-wrapper) .cards > ul > li:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px light-dark(rgb(14 14 14 / 12%), rgb(0 0 0 / 45%));
-  border-color: light-dark(rgb(14 14 14 / 14%), rgb(245 242 237 / 22%));
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
 }
 
 /* Tablet: 2 columns */

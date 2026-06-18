@@ -35,8 +35,10 @@
 .banner .banner-media img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  max-width: 480px;
+  height: auto;
+  margin: 0 auto;
+  object-fit: contain;
 
   /* override global main img 16/9 crop */
   aspect-ratio: auto;
@@ -47,40 +49,40 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
   padding: 32px;
   color: #fff;
 }
 
 .banner .banner-body :is(h1, h2, h3, h4) {
-  margin: 0;
+  margin: 0 0 20px;
   font-family: var(--monroe-heading-font);
   font-weight: 600;
   font-size: 36px;
-  line-height: 1.05;
+  line-height: 1.1;
   text-transform: uppercase;
   color: #fff;
 }
 
 .banner .banner-body p {
-  margin: 0;
+  margin: 0 0 15px;
   font-family: var(--monroe-body-font);
   font-size: 16px;
-  line-height: 1.7;
+  line-height: 1.875;
 }
 
 /* CTA — yellow Monroe button */
 .banner a.banner-cta:any-link {
   align-self: flex-start;
-  margin-top: 8px;
-  padding: 14px 36px;
+  margin-top: 10px;
+  padding: 25px 43px;
   background: var(--monroe-yellow, #ffd100);
   color: var(--monroe-button-text, #212121);
   border: 0;
-  border-radius: var(--monroe-button-radius, 6px);
+  border-radius: 5px;
   font-family: var(--monroe-heading-font);
   font-weight: 700;
   font-size: 14px;
+  line-height: 1;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   text-decoration: none;
@@ -97,19 +99,25 @@
 @media (width >= 900px) {
   .banner > div {
     flex-direction: row;
+    align-items: center;
     min-height: 420px;
+    padding: 64px 24px;
   }
 
   .banner .banner-media {
+    display: flex;
     flex: 1 1 50%;
+    align-items: center;
+    justify-content: center;
   }
 
   .banner .banner-body {
     flex: 1 1 50%;
-    padding: 48px;
+    padding: 0 0 0 32px;
   }
 
   .banner .banner-body :is(h1, h2, h3, h4) {
     font-size: 50px;
+    line-height: 55px;
   }
 }
