@@ -1,11 +1,12 @@
+import { revealOnScroll } from '../../scripts/shared.js';
+
 /**
- * Hero Banner block — Monroe full-bleed page hero.
- * A background image fills the band while the heading + paragraph sit overlaid,
- * left-aligned and vertically centered, in white text.
- * Source: Monroe product-category "Restore Your Ride" header hero.
+ * Hero Banner block — light/minimal two-up hero.
+ * Classifies the media cell and text cell, then reveals them on load with a
+ * gentle fade/slide.
  *
  * Expected authored structure (one row, two cells):
- *   row 1: cell 1 = background image; cell 2 = heading + paragraph
+ *   row 1: cell 1 = image; cell 2 = heading + paragraph
  *
  * @param {Element} block The hero-banner block element
  */
@@ -19,4 +20,7 @@ export default function decorate(block) {
 
   if (mediaCell) mediaCell.className = 'hero-banner-bg';
   if (bodyCell) bodyCell.className = 'hero-banner-body';
+
+  const toReveal = [bodyCell, mediaCell].filter(Boolean);
+  revealOnScroll(toReveal, { threshold: 0.1, stagger: 120 });
 }

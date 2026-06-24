@@ -571,6 +571,29 @@ main img:not([width], [height]) {
   object-fit: cover;
 }
 
+/* Reveal-on-scroll utility (used by revealOnScroll in shared.js). Elements
+   fade + slide up as they enter the viewport. */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms),
+              transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
 /* sections – boilerplate structure with design tokens */
 :is(main, article.article-body) > .section {
   margin: inherit;

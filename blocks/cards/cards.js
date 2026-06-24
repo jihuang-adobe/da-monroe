@@ -5,6 +5,7 @@ import {
   getAuthoredLinks,
   normalizePath,
   resolveArticlesFromIndex,
+  revealOnScroll,
   isUE,
 } from '../../scripts/shared.js';
 
@@ -190,4 +191,8 @@ export default async function decorate(block) {
   } else {
     decorateDefault(block);
   }
+
+  // Reveal each card on scroll (staggered).
+  const items = block.querySelectorAll(':scope > ul > li');
+  if (items.length) revealOnScroll(items, { threshold: 0.1, stagger: 90 });
 }

@@ -1,3 +1,5 @@
+import { revealOnScroll } from '../../scripts/shared.js';
+
 export default function decorate(block) {
   const cols = [...block.firstElementChild.children];
   block.classList.add(`columns-callout-${cols.length}-cols`);
@@ -15,4 +17,6 @@ export default function decorate(block) {
       }
     });
   });
+
+  revealOnScroll(block, { threshold: 0.2 });
 }

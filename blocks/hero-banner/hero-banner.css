@@ -1,103 +1,123 @@
-/* Hero Banner block — Monroe full-bleed page hero: background image with
-   overlaid white heading + paragraph, left-aligned and vertically centered.
-   Values from monroe.com product-category header hero. */
+/* Hero Banner — light & minimal redesign.
+   A clean two-up hero: oversized thin headline + intro on a light panel,
+   with the product photo beside it. Generous whitespace, hairline accent,
+   Monroe yellow used sparingly. Replaces the former dark full-bleed overlay. */
 
-/* Full-bleed: break out of the section's content max-width so the hero spans
-   the viewport edge-to-edge (matches the source). Independent of parent
-   centering — anchors to the viewport edges directly. */
 .hero-banner {
+  --hb-ink: #1a1a1a;
+  --hb-muted: #6b6b6b;
+  --hb-line: #ececec;
+  --hb-accent: var(--monroe-yellow, #ffd100);
+
   width: 100vw;
+  max-width: 100vw;
   margin-left: calc(50% - 50vw);
   margin-right: calc(50% - 50vw);
-  max-width: 100vw;
+  background: #fff;
 }
 
 .hero-banner > div {
-  position: relative;
   display: flex;
+  flex-direction: column;
+  gap: 32px;
   align-items: center;
-  min-height: 360px;
-  overflow: hidden;
-  background: var(--monroe-bg-dark, #0e0e0e);
+  max-width: var(--monroe-content-width, 1200px);
+  margin: 0 auto;
+  padding: 56px 24px;
 }
 
-/* Background image fills the band */
+/* Media — soft, rounded, light */
 .hero-banner .hero-banner-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
+  position: static;
+  width: 100%;
   line-height: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #f6f6f6;
 }
+
+.hero-banner .hero-banner-bg::after { content: none; }
 
 .hero-banner .hero-banner-bg img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-
-  /* override global main img 16/9 crop */
-  aspect-ratio: auto;
+  aspect-ratio: 16 / 10;
 }
 
-/* Source uses no overlay — the photo is dark on the left where the text sits,
-   and the black band background fills the uncovered area. */
-
-/* Overlaid text column */
+/* Text — dark on light, thin oversized headline */
 .hero-banner .hero-banner-body {
-  position: relative;
-  z-index: 1;
+  position: static;
+  z-index: auto;
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  width: 100%;
   max-width: 640px;
-  padding: 40px 24px;
-  color: #fff;
+  padding: 0;
+  color: var(--hb-ink);
+  text-align: center;
+}
+
+/* thin yellow accent rule above the heading */
+.hero-banner .hero-banner-body::before {
+  content: "";
+  width: 56px;
+  height: 3px;
+  margin: 0 auto;
+  background: var(--hb-accent);
+  border-radius: 2px;
 }
 
 .hero-banner .hero-banner-body :is(h1, h2, h3) {
   margin: 0;
   font-family: var(--monroe-heading-font);
-  font-weight: 600;
-  font-size: 40px;
+  font-weight: 300;
+  font-size: 44px;
   line-height: 1.05;
-  text-transform: uppercase;
-  color: #fff;
+  letter-spacing: -0.02em;
+  text-transform: none;
+  color: var(--hb-ink);
 }
 
 .hero-banner .hero-banner-body p {
-  margin: 0;
+  margin: 0 auto;
+  max-width: 52ch;
   font-family: var(--monroe-body-font);
-  font-size: 16px;
-  line-height: 30px;
-  color: #fff;
+  font-size: 17px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--hb-muted);
 }
 
-/* Tablet */
-@media (width >= 600px) {
-  .hero-banner > div {
-    min-height: 460px;
-  }
-
-  .hero-banner .hero-banner-body {
-    padding: 60px 48px;
-  }
-
-  .hero-banner .hero-banner-body :is(h1, h2, h3) {
-    font-size: 54px;
-  }
-}
-
-/* Desktop: match source — 580px band, generous padding, condensed-bold heading */
+/* Tablet+ : side-by-side, text left, larger headline */
 @media (width >= 900px) {
   .hero-banner > div {
-    min-height: 580px;
+    flex-direction: row;
+    gap: 64px;
+    padding: 96px 48px;
+    min-height: 0;
   }
 
   .hero-banner .hero-banner-body {
-    padding: 90px;
+    flex: 1 1 42%;
+    text-align: left;
+    max-width: none;
+  }
+
+  .hero-banner .hero-banner-body::before {
+    margin: 0;
+  }
+
+  .hero-banner .hero-banner-body p {
+    margin: 0;
   }
 
   .hero-banner .hero-banner-body :is(h1, h2, h3) {
-    font-size: 66px;
-    line-height: 70px;
+    font-size: 76px;
+  }
+
+  .hero-banner .hero-banner-bg {
+    flex: 1 1 58%;
   }
 }
